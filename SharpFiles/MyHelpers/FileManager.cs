@@ -13,15 +13,22 @@ namespace SharpFiles.MyHelpers
         public static IEnumerable<FileInfo> GetAllFiles(string rutaPadre, string tipoExtension)
         {
             IEnumerable<FileInfo> files;
+
+            var options = new EnumerationOptions
+            {
+                RecurseSubdirectories = true,
+                IgnoreInaccessible = true
+            };
+
             if (tipoExtension.Contains("None"))
             {
-                files = Directory.GetFiles(rutaPadre, "*", SearchOption.AllDirectories)
+                files = Directory.GetFiles(rutaPadre, "*", options)
                         .Select(arch => new FileInfo(arch)).OrderByDescending(arch => arch.LastWriteTime);
 
             }
             else
             {
-                files = Directory.GetFiles(rutaPadre, $"*.{tipoExtension}", SearchOption.AllDirectories)
+                files = Directory.GetFiles(rutaPadre, $"*.{tipoExtension}", options)
                         .Select(arch => new FileInfo(arch)).OrderByDescending(arch => arch.LastWriteTime);
 
             }
