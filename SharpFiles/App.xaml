@@ -1,0 +1,112 @@
+﻿<Application
+    x:Class="SharpFiles.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:SharpFiles"
+    StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Style x:Key="btnVerUbicacion" TargetType="Button">
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontStretch" Value="SemiExpanded" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Margin" Value="5,10" />
+
+        </Style>
+
+
+        <Style x:Key="fileNameTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,0,8,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="FontFamily" Value="Segoe UI Semibold" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontStretch" Value="Normal" />
+            <Setter Property="Width" Value="450" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+
+        <Style x:Key="listViewItemCompact" TargetType="ListViewItem">
+            <Setter Property="Padding" Value="6" />
+            <Setter Property="Margin" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Background" Value="Transparent" />
+
+        </Style>
+
+
+        <!--  Colores base  -->
+        <Color x:Key="Warm_Background_Color">#FBF9F7</Color>
+        <Color x:Key="Warm_Surface_Color">#CEC0B1</Color>
+        <Color x:Key="Warm_Neutral_Color">#A49A87</Color>
+        <Color x:Key="Warm_Text_Color">#263238</Color>
+        <Color x:Key="Warm_Accent_Color">#00796B</Color>
+
+        <!--  Brushes  -->
+        <SolidColorBrush x:Key="Brush.Background" Color="{StaticResource Warm_Background_Color}" />
+        <SolidColorBrush x:Key="Brush.Surface" Color="{StaticResource Warm_Surface_Color}" />
+        <SolidColorBrush x:Key="Brush.Neutral" Color="{StaticResource Warm_Neutral_Color}" />
+        <SolidColorBrush x:Key="Brush.Text" Color="{StaticResource Warm_Text_Color}" />
+        <SolidColorBrush x:Key="Brush.Accent" Color="{StaticResource Warm_Accent_Color}" />
+
+        <Style x:Key="WarmWindowStyle" TargetType="Window">
+            <Setter Property="Background" Value="{StaticResource Brush.Background}" />
+            <Setter Property="Foreground" Value="{StaticResource Brush.Text}" />
+        </Style>
+
+        <!--  GroupBox style  -->
+        <Style x:Key="WarmGroupBox" TargetType="GroupBox">
+            <Setter Property="Background" Value="{StaticResource Brush.Surface}" />
+            <Setter Property="BorderBrush" Value="{StaticResource Brush.Neutral}" />
+            <Setter Property="Padding" Value="8" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="Foreground" Value="{StaticResource Brush.Text}" />
+        </Style>
+
+        <Style x:Key="WarmButton" TargetType="Button">
+            <Setter Property="Padding" Value="6" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{StaticResource Brush.Text}" />
+            <Setter Property="Background" Value="{StaticResource Brush.Background}" />
+            <Setter Property="BorderBrush" Value="{StaticResource Brush.Neutral}" />
+            <Setter Property="BorderThickness" Value="0.8" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="WhiteSmoke" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#D6CFC6" />
+                    <Setter Property="Foreground" Value="#8A857D" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--  TextBlock para nombres de archivo  -->
+        <Style x:Key="FileNameText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource Brush.Text}" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+
+
+
+    </Application.Resources>
+</Application>
