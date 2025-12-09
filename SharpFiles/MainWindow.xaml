@@ -62,14 +62,49 @@
                         Content="Ruta en donde se encuentran los archivos:" />
 
 
-                    <TextBlock
-                        Width="300"
-                        Padding="0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        FontSize="13"
-                        Foreground="{StaticResource Brush.Text}"
-                        Text="{Binding RutaCarpeta}" />
+                    <Button Command="{Binding SearchFolderCommand}">
+                        <Button.Content>
+                            <TextBlock
+                                Width="300"
+                                Padding="0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="13"
+                                Foreground="{StaticResource Brush.Text}"
+                                Text="{Binding RutaCarpeta}" />
+                        </Button.Content>
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Setter Property="BorderThickness" Value="0" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Cursor" Value="Hand" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border
+                                                Padding="{TemplateBinding Padding}"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter />
+                                            </Border>
+
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                        <Setter Property="BorderBrush" Value="Black" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
+                    </Button>
                     <!--<Border
                         Background="WhiteSmoke"
                         BorderBrush="BlanchedAlmond"
