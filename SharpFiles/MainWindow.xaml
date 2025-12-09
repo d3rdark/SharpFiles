@@ -118,20 +118,9 @@
                             Text="{Binding RutaCarpeta}" />
                     </Border>-->
                 </StackPanel>
-                <Grid Grid.Column="2" HorizontalAlignment="Left">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-                    <Button
-                        Width="150"
-                        VerticalAlignment="Center"
-                        Command="{Binding SearchFolderCommand}"
-                        Content="Examinar..."
-                        Style="{StaticResource WarmButton}" />
-                </Grid>
+
             </Grid>
         </GroupBox>
-
         <GroupBox
             Grid.Row="2"
             FontSize="14"
