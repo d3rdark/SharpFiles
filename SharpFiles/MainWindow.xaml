@@ -161,17 +161,21 @@
             ItemsSource="{Binding Files}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Nombre del archivo">
+                    <GridViewColumn Header="Nombre del archivo" HeaderContainerStyle="{DynamicResource CustomHeaderStyle}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Style="{StaticResource FileNameText}" Text="{Binding Name}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Accion rapida">
+                    <GridViewColumn Header="Accion rapida" HeaderContainerStyle="{DynamicResource CustomHeaderStyle}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Mostrar ubicacion" Style="{StaticResource btnVerUbicacion}" />
+                                <Button
+                                    Command="{Binding DataContext.ItemFileCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                    CommandParameter="{Binding}"
+                                    Content="Mostrar ubicacion"
+                                    Style="{StaticResource btnVerUbicacion}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
