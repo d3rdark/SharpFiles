@@ -12,7 +12,6 @@
     Height="650"
     MinWidth="900"
     MinHeight="600"
-    MaxHeight="650"
     Style="{StaticResource WarmWindowStyle}"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
@@ -62,7 +61,7 @@
                         Content="Ruta en donde se encuentran los archivos:" />
 
 
-                    <Button Command="{Binding SearchFolderCommand}">
+                    <Button Command="{Binding SearchFolderCommand}" ToolTip="Da click aquí para escoger la carpeta">
                         <Button.Content>
                             <TextBlock
                                 Width="300"
@@ -105,18 +104,7 @@
                         </Button.Style>
 
                     </Button>
-                    <!--<Border
-                        Background="WhiteSmoke"
-                        BorderBrush="BlanchedAlmond"
-                        BorderThickness="1"
-                        CornerRadius="10">
-                        <TextBlock
-                            Width="300"
-                            Padding="10"
-                            FontSize="13"
-                            FontWeight="Normal"
-                            Text="{Binding RutaCarpeta}" />
-                    </Border>-->
+
                 </StackPanel>
 
             </Grid>
@@ -157,7 +145,7 @@
                             Height="15"
                             Margin="10,0,10,0"
                             Foreground="Black"
-                            Icon="SearchPlus" />
+                            Icon="Search" />
                         <TextBlock
                             VerticalAlignment="Center"
                             FontFamily="Segoe UI"
@@ -179,7 +167,7 @@
 
         <ListView
             Grid.Row="3"
-            Height="350"
+            Height="auto"
             Padding="0"
             ItemContainerStyle="{StaticResource listViewItemCompact}"
             ItemsSource="{Binding Files}">
@@ -192,14 +180,29 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Accion rapida" HeaderContainerStyle="{DynamicResource CustomHeaderStyle}">
+                    <GridViewColumn Header="Mostrar ubicación" HeaderContainerStyle="{DynamicResource CustomHeaderStyle}">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button
                                     Command="{Binding DataContext.ItemFileCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
                                     CommandParameter="{Binding}"
-                                    Content="Mostrar ubicacion"
-                                    Style="{StaticResource btnVerUbicacion}" />
+                                    Style="{StaticResource btnVerUbicacion}"
+                                    ToolTip="Ver ubicación del archivo">
+                                    <Button.Content>
+                                        <fa:ImageAwesome
+                                            Width="20"
+                                            Height="20"
+                                            Foreground="{StaticResource Brush.Text}"
+                                            Icon="FolderOpen" />
+                                    </Button.Content>
+                                </Button>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Ruta del archivo" HeaderContainerStyle="{DynamicResource CustomHeaderStyle}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Style="{StaticResource filePathTextBlockStyle}" Text="{Binding DirectoryName}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
