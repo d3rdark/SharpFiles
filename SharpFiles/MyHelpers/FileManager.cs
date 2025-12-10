@@ -51,6 +51,7 @@ namespace SharpFiles.MyHelpers
     }
     enum ExtensionesArchivos
     {
+        //Deja el filtro libre
         None,
         //Imagenes
         jpg, png, gif, bmp, tiff, jpeg, webp,
