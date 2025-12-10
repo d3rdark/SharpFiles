@@ -10,8 +10,9 @@
             <Setter Property="FontSize" Value="13" />
             <Setter Property="FontStretch" Value="SemiExpanded" />
             <Setter Property="Padding" Value="5" />
-            <Setter Property="HorizontalAlignment" Value="Left" />
-            <Setter Property="Margin" Value="5,10" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="Background" Value="Transparent" />
 
         </Style>
 
@@ -59,7 +60,7 @@
 
         <!--  GroupBox style  -->
         <Style x:Key="WarmGroupBox" TargetType="GroupBox">
-            <Setter Property="Background" Value="{StaticResource Brush.Surface}" />
+            <!--<Setter Property="Background" Value="{StaticResource Brush.Surface}" />-->
             <Setter Property="BorderBrush" Value="{StaticResource Brush.Neutral}" />
             <Setter Property="Padding" Value="8" />
             <Setter Property="Margin" Value="0,0,0,10" />
@@ -106,6 +107,16 @@
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontSize" Value="13" />
+        </Style>
+
+        <Style x:Key="filePathTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource Brush.Text}" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="13" />
+        </Style>
+        <Style x:Key="buttonShowFolder" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
 
         <Style x:Key="CustomHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
