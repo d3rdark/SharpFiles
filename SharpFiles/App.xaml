@@ -72,10 +72,11 @@
             <Setter Property="Height" Value="36" />
             <Setter Property="FontSize" Value="13" />
             <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="SnapsToDevicePixels" Value="True" />
             <Setter Property="Foreground" Value="{StaticResource Brush.Text}" />
             <Setter Property="Background" Value="{StaticResource Brush.Background}" />
             <Setter Property="BorderBrush" Value="{StaticResource Brush.Neutral}" />
-            <Setter Property="BorderThickness" Value="0.8" />
+            <Setter Property="BorderThickness" Value="1.5" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
