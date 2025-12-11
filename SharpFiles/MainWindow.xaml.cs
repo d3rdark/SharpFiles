@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SharpFiles.Views;
 
 namespace SharpFiles
 {
@@ -19,6 +20,17 @@ namespace SharpFiles
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnAbout_Click(object sender, RoutedEventArgs e)
+        {
+            var aboutWindow = new AboutWindow
+            {
+                Owner = this
+            };
+
+            aboutWindow.ShowDialog();
+
         }
     }
 }

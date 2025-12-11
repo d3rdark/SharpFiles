@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.fontawesome.io/icons/"
+    xmlns:helprs="clr-namespace:SharpFiles.MyHelpers"
     xmlns:local="clr-namespace:SharpFiles"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SharpFiles.ViewModels"
@@ -19,6 +20,9 @@
         <vm:ShowFilesViewModels />
     </Window.DataContext>
 
+    <Window.Resources>
+        <helprs:ExtensionToIconConverter x:Key="ExtensionToIconConverter" />
+    </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -27,14 +31,29 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <TextBlock
+                Grid.Column="0"
                 Margin="5"
                 FontFamily="Segoe UI"
                 FontSize="20"
                 FontStretch="Normal"
                 Text="{Binding ProjectTitle}" />
-        </StackPanel>
+
+            <Button
+                x:Name="btnAbout"
+                Grid.Column="1"
+                Width="100"
+                Margin="20,0,0,0"
+                HorizontalAlignment="Right"
+                Click="btnAbout_Click"
+                Content="Acerda de..."
+                Style="{StaticResource WarmButton}" />
+        </Grid>
 
         <GroupBox
             Grid.Row="1"
@@ -128,9 +147,26 @@
                         FontSize="15"
                         Foreground="Black" />
                     <ComboBox
-                        Width="80"
+                        Width="100"
+                        Height="35"
+                        Padding="5"
+                        HorizontalContentAlignment="Left"
+                        VerticalContentAlignment="Center"
                         ItemsSource="{Binding FileExtensions}"
-                        SelectedItem="{Binding SelectedExtension}" />
+                        SelectedItem="{Binding SelectedExtension}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="2" Orientation="Horizontal">
+                                    <fa:ImageAwesome
+                                        Width="16"
+                                        Height="16"
+                                        Foreground="DarkSlateGray"
+                                        Icon="{Binding Converter={StaticResource ExtensionToIconConverter}}" />
+                                    <TextBlock Margin="5,0" Text="{Binding}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </StackPanel>
 
                 <Button
@@ -138,7 +174,8 @@
                     Width="150"
                     Margin="5,0"
                     HorizontalContentAlignment="Left"
-                    Command="{Binding SearchFilesCommand}">
+                    Command="{Binding SearchFilesCommand}"
+                    Style="{StaticResource WarmButton}">
                     <StackPanel Orientation="Horizontal">
                         <fa:ImageAwesome
                             Width="15"
