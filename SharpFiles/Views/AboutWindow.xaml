@@ -38,8 +38,8 @@
             <TextBlock FontWeight="Bold" Text="Atribuciones:" />
 
             <TextBlock Margin="0,5">
-                <Hyperlink NavigateUri="https://www.flaticon.es/iconos-gratis/edicion-de-fotos" RequestNavigate="Hyperlink_RequestNavigate">
-                    Edición de fotos iconos creados por nangicon - Flaticon
+                <Hyperlink NavigateUri="https://www.flaticon.es/iconos-gratis/documento" RequestNavigate="Hyperlink_RequestNavigate">
+                    Documento iconos creados por Freepik - Flaticon
                 </Hyperlink>
             </TextBlock>
 
