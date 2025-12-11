@@ -21,7 +21,7 @@ namespace SharpFiles.ViewModels
         ObservableCollection<FileInfo> _files = new ObservableCollection<FileInfo>();
 
         [ObservableProperty]
-        List<string> _fileExtensions = new List<string>();
+        List<string?> _fileExtensions = new List<string?>();
 
         [ObservableProperty]
         private string? _projectTitle;
