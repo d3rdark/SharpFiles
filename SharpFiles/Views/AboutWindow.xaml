@@ -1,0 +1,48 @@
+﻿<Window
+    x:Class="SharpFiles.Views.AboutWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SharpFiles.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="AboutWindow"
+    Width="800"
+    Height="450"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner"
+    mc:Ignorable="d">
+    <Grid Margin="20">
+        <StackPanel>
+            <TextBlock
+                Margin="0,0,0,10"
+                FontSize="24"
+                FontWeight="Bold"
+                Text="SharpFiles" />
+
+            <TextBlock
+                Margin="0,0,0,10"
+                FontSize="14"
+                Text="Version 1.0.0" />
+
+            <Separator Margin="0,15" />
+
+            <TextBlock Text="Aplicacion creada por d3rdark - (Ulises García)" TextWrapping="Wrap" />
+
+            <TextBlock
+                Margin="0,5"
+                Text="Proyecto WPF (.NET 8) para búsqueda y administración de archivos."
+                TextWrapping="Wrap" />
+
+            <Separator Margin="0,15" />
+
+            <TextBlock FontWeight="Bold" Text="Atribuciones:" />
+
+            <TextBlock Margin="0,5">
+                <Hyperlink NavigateUri="https://www.flaticon.es/iconos-gratis/edicion-de-fotos" RequestNavigate="Hyperlink_RequestNavigate">
+                    Edición de fotos iconos creados por nangicon - Flaticon
+                </Hyperlink>
+            </TextBlock>
+
+        </StackPanel>
+    </Grid>
+</Window>
