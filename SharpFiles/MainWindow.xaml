@@ -143,12 +143,15 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
                     <Label
+                        Padding="0"
+                        VerticalContentAlignment="Center"
                         Content="Tipo de archivo"
                         FontSize="15"
                         Foreground="Black" />
                     <ComboBox
-                        Width="100"
+                        Width="150"
                         Height="35"
+                        Margin="5,0"
                         Padding="5"
                         HorizontalContentAlignment="Left"
                         VerticalContentAlignment="Center"
@@ -158,8 +161,8 @@
                             <DataTemplate>
                                 <StackPanel Margin="2" Orientation="Horizontal">
                                     <fa:ImageAwesome
-                                        Width="16"
-                                        Height="16"
+                                        Width="20"
+                                        Height="20"
                                         Foreground="DarkSlateGray"
                                         Icon="{Binding Converter={StaticResource ExtensionToIconConverter}}" />
                                     <TextBlock Margin="5,0" Text="{Binding}" />
@@ -180,7 +183,7 @@
                         <fa:ImageAwesome
                             Width="15"
                             Height="15"
-                            Margin="10,0,10,0"
+                            Margin="0,0,10,0"
                             Foreground="Black"
                             Icon="Search" />
                         <TextBlock
