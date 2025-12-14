@@ -22,9 +22,12 @@
 
     <Window.Resources>
         <helprs:ExtensionToIconConverter x:Key="ExtensionToIconConverter" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <helprs:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
     </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -205,8 +208,71 @@
 
         </GroupBox>
 
+        <Grid Grid.Row="3" Margin="0,5,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <!--  Indicador de progreso  -->
+            <ProgressBar
+                Grid.Column="0"
+                Width="150"
+                Height="20"
+                Margin="5,0"
+                IsIndeterminate="{Binding IsSearching}"
+                Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Value="{Binding SearchProgress}" />
+
+            <TextBlock
+                Grid.Column="1"
+                Margin="10,0"
+                VerticalAlignment="Center"
+                FontSize="13"
+                FontWeight="SemiBold"
+                Foreground="{StaticResource Brush.Text}"
+                Text="{Binding SearchStatus}" />
+            <!--  Tiempo de busqueda  -->
+            <TextBlock
+                Grid.Column="2"
+                Margin="5,0"
+                VerticalAlignment="Center"
+                Foreground="{StaticResource Brush.Text}"
+                Text="{Binding SearchTime}"
+                Visibility="{Binding SearchTime, Converter={StaticResource StringToVisibilityConverter}}" />
+
+            <!--  Tamaño total  -->
+            <TextBlock
+                Grid.Column="3"
+                Margin="5,0,10,0"
+                VerticalAlignment="Center"
+                Foreground="{StaticResource Brush.Text}"
+                Text="{Binding TotalSize}"
+                Visibility="{Binding TotalSize, Converter={StaticResource StringToVisibilityConverter}}" />
+
+            <!--  Botón de cancelar  -->
+            <Button
+                Grid.Column="4"
+                Width="100"
+                Margin="5,0"
+                Command="{Binding CancelSearchCommand}"
+                Style="{StaticResource WarmButton}"
+                Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal">
+                    <fa:ImageAwesome
+                        Width="15"
+                        Height="15"
+                        Margin="0,0,5,0"
+                        Foreground="Black"
+                        Icon="Ban" />
+                    <TextBlock Text="Cancelar" />
+                </StackPanel>
+            </Button>
+        </Grid>
+
         <ListView
-            Grid.Row="3"
+            Grid.Row="4"
             Height="auto"
             Padding="0"
             ItemContainerStyle="{StaticResource listViewItemCompact}"
