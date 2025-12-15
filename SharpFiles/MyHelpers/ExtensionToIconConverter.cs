@@ -46,7 +46,7 @@ namespace SharpFiles.MyHelpers
                         => FontAwesomeIcon.FileArchiveOutline,
 
                     // Video
-                    "mp4" or "avi" or "mkv" or "mov" or "wmv" or "flv" or "webm" or "mpg" or "mpeg" or "3gp"
+                    "mp4" or "m4v" or "avi" or "mkv" or "mov" or "wmv" or "flv" or "webm" or "mpg" or "mpeg" or "3gp"
                         => FontAwesomeIcon.FileVideoOutline,
 
                     // Audio
