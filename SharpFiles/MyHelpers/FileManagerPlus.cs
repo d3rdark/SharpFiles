@@ -220,7 +220,7 @@ namespace SharpFiles.MyHelpers
             xls, xlsx, ods,
             ppt, pptx, odp,
             zip, rar, cbr, cbz,
-            mp4, avi, mkv, mov, wmv, flv, webm, mpg, mpeg, _3gp,
+            mp4, m4v, avi, mkv, mov, wmv, flv, webm, mpg, mpeg, _3gp,
             mp3, wav, flac, aac, ogg, m4a,
             sql, db, sqlite, mdf
         }
