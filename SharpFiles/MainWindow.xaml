@@ -22,6 +22,9 @@
 
     <Window.Resources>
         <helprs:ExtensionToIconConverter x:Key="ExtensionToIconConverter" />
+
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <helprs:InverseBooleanConverter x:Key="InverseBooleanConverter" />
     </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -140,6 +143,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Orientation="Horizontal">
                     <Label
@@ -195,8 +199,32 @@
                     </StackPanel>
                 </Button>
 
-                <TextBlock
+                <Button
                     Grid.Column="2"
+                    Width="150"
+                    Margin="5,0"
+                    HorizontalContentAlignment="Left"
+                    Command="{Binding MoveFilesCommand}"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}}"
+                    Style="{StaticResource WarmButton}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:ImageAwesome
+                            Width="15"
+                            Height="15"
+                            Margin="0,0,10,0"
+                            Foreground="Black"
+                            Icon="FolderOpen" />
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontFamily="Segoe UI"
+                            FontSize="13"
+                            FontStretch="Normal"
+                            Text="Mover archivos" />
+                    </StackPanel>
+                </Button>
+
+                <TextBlock
+                    Grid.Column="3"
                     Margin="10,0"
                     VerticalAlignment="Center"
                     Foreground="{StaticResource Brush.Text}"
@@ -250,5 +278,43 @@
             </ListView.View>
 
         </ListView>
+
+        <Border
+            Grid.Row="3"
+            Height="30"
+            VerticalAlignment="Bottom"
+            Background="{StaticResource Brush.Background}"
+            BorderBrush="{StaticResource Brush.Accent}"
+            BorderThickness="0,1,0,0">
+            <Grid Margin="10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <!--  Indicador de ocupado  -->
+                <fa:ImageAwesome
+                    Grid.Column="0"
+                    Width="16"
+                    Height="16"
+                    Margin="0,0,10,0"
+                    Foreground="{StaticResource Brush.Accent}"
+                    Icon="Spinner"
+                    Spin="True"
+                    Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" />
+
+
+
+                <!--  Mensaje de estado  -->
+                <TextBlock
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    FontSize="12"
+                    Foreground="{StaticResource Brush.Text}"
+                    Text="{Binding StatusMessage}" />
+            </Grid>
+        </Border>
+
+
     </Grid>
 </Window>
