@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-
+using Ookii.Dialogs.Wpf;
 namespace SharpFiles.ViewModels
 {
     public partial class ShowFilesViewModels : ObservableObject
@@ -31,6 +31,9 @@ namespace SharpFiles.ViewModels
             Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
 
         [ObservableProperty]
+        private string? _rutaDestino;
+
+        [ObservableProperty]
         private string? _selectedExtension;
 
         [ObservableProperty]
@@ -42,11 +45,17 @@ namespace SharpFiles.ViewModels
         [ObservableProperty]
         private FileInfo? _archivoSeleccionado;
 
+        [ObservableProperty]
+        private bool isBusy;
+
+        [ObservableProperty]
+        private string statusMessage = "Listo";
+
         public ShowFilesViewModels()
         {
             ProjectTitle = "Buscador de archivos";
             GetFileExtensions();
-            
+
         }
 
         partial void OnSelectedExtensionChanged(string? value)
@@ -81,7 +90,7 @@ namespace SharpFiles.ViewModels
         [RelayCommand(CanExecute = nameof(CanShowFiles))]
         private async Task SearchFiles()
         {
-            
+
             if (!string.IsNullOrWhiteSpace(RutaCarpeta) && !string.IsNullOrWhiteSpace(SelectedExtension))
             {
                 var files = await FileManager.GetAllFilesAsync(RutaCarpeta, SelectedExtension);
@@ -94,6 +103,81 @@ namespace SharpFiles.ViewModels
 
             }
         }
+
+        [RelayCommand]
+        private async Task MoveFiles()
+        {
+            // verificar si existen archivos que se pueden mover...
+
+            if (Files == null || !Files.Any())
+            {
+                MessageBox.Show("No hay archivos para mover. Realiza primero una búsqueda.",
+                              "Información",
+                              MessageBoxButton.OK,
+                              MessageBoxImage.Information);
+                return;
+            }
+
+
+            var dialog = new VistaFolderBrowserDialog
+            {
+                Description = "Selecciona la carpeta donde se moverán los archivos",
+                UseDescriptionForTitle = true,
+                Multiselect = false,
+                ShowNewFolderButton = true,
+                SelectedPath = RutaCarpeta
+            };
+
+
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    IsBusy = true;
+                    StatusMessage = $"Moviendo {Files.Count} archivos...";
+
+                    var destinetionPath = dialog.SelectedPath;
+
+                    // mover archivos de forma asincrona
+                    await FileManager.MoveAllFiles(destinetionPath, Files, maxConcurrency: 4);
+
+                    StatusMessage = $"✓ {Files.Count} archivos movidos correctamente";
+
+                    MessageBox.Show($"Se movieron {Files.Count} archivos a:\n{destinetionPath}",
+                                  "Operación exitosa",
+                                  MessageBoxButton.OK,
+                                  MessageBoxImage.Information);
+
+                    // Limpiar la lista después de mover
+                    Files.Clear();
+                    NumFiles = 0;
+                }
+                catch (UnauthorizedAccessException)
+                {
+
+                    StatusMessage = "Error: Sin permisos de acceso";
+                    MessageBox.Show("No tienes permisos para acceder a esa carpeta",
+                                  "Error de permisos",
+                                  MessageBoxButton.OK,
+                                  MessageBoxImage.Error);
+                }
+                catch (IOException ex)
+                {
+                    StatusMessage = $"Error: {ex.Message}";
+                    MessageBox.Show($"Error al mover archivos:\n{ex.Message}",
+                                  "Error",
+                                  MessageBoxButton.OK,
+                                  MessageBoxImage.Error);
+                }
+
+                finally
+                {
+                   IsBusy = false;
+                }
+            }
+
+        }
+
 
         private void GetFileExtensions()
         {
@@ -109,16 +193,6 @@ namespace SharpFiles.ViewModels
             return (!string.IsNullOrWhiteSpace(SelectedExtension) && !string.IsNullOrWhiteSpace(RutaCarpeta));
         }
 
-
-        
-
-
-        //[RelayCommand]
-        //private void ShowFolder()
-        //{
-        //    Process.Start("explorer.exe", RutaCarpeta);
-        //}
-
         [RelayCommand]
         private void ItemFile(FileInfo fileInfo)
         {
@@ -128,8 +202,5 @@ namespace SharpFiles.ViewModels
             var rutaArchivo = ArchivoSeleccionado.FullName;
             Process.Start("explorer.exe", "/select,\"" + rutaArchivo + "\"");
         }
-
-        
-
     }
 }
