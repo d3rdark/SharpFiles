@@ -9,7 +9,6 @@ namespace SharpFiles.MyHelpers
 {
     public static class FileManager
     {
-
         public static IEnumerable<FileInfo> GetAllFiles(string rutaPadre, string tipoExtension)
         {
             IEnumerable<FileInfo> files;
@@ -48,6 +47,45 @@ namespace SharpFiles.MyHelpers
             return listaExtension;
         }
 
+
+        //public static void MoveAllFiles(string path, IEnumerable<FileInfo> files)
+        //{
+        //    foreach (var items in files)
+        //    {
+        //        _pathFather = Path.Combine(path, Path.GetFileName(items.Name));
+        //        if (!File.Exists(_pathFather))
+        //        {
+        //            File.Move(items.FullName, _pathFather);
+        //        }
+        //    }
+        //}
+
+        public static async Task MoveAllFiles(string path, IEnumerable<FileInfo> files, int maxConcurrency = 4)
+        {
+            using var semaphore = new SemaphoreSlim(maxConcurrency);
+
+            var tasks = files.Select(async file =>
+            {
+                await semaphore.WaitAsync();
+                try
+                {
+                    var destinationPath = Path.Combine(path, file.Name);
+                    await Task.Run(() =>
+                    {
+                        if (!File.Exists(destinationPath))
+                        {
+                            File.Move(file.FullName, destinationPath);
+                        }
+                    });
+                }
+                finally
+                {
+                    semaphore.Release();
+                }
+            });
+
+            await Task.WhenAll(tasks);
+        }
     }
     enum ExtensionesArchivos
     {
